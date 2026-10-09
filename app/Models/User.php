@@ -46,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the study tracer associated with the user (student).
+     */
+    public function studyTracer()
+    {
+        return $this->hasOne(StudyTracer::class);
+    }
 }
