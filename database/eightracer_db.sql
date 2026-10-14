@@ -2955,6 +2955,78 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_users_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `profil_murid`
+--
+ALTER TABLE `profil_murid`
+  ADD CONSTRAINT `fk_profilmurid_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `media_sosial`
+--
+ALTER TABLE `media_sosial`
+  ADD CONSTRAINT `fk_mediasosial_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orang_tua`
+--
+ALTER TABLE `orang_tua`
+  ADD CONSTRAINT `fk_orangtua_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `bantuan`
+--
+ALTER TABLE `bantuan`
+  ADD CONSTRAINT `fk_bantuan_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `wali`
+--
+ALTER TABLE `wali`
+  ADD CONSTRAINT `fk_wali_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `aturan_rekomendasi`
+--
+ALTER TABLE `aturan_rekomendasi`
+  ADD CONSTRAINT `fk_aturan_ekskul` FOREIGN KEY (`ekstrakurikuler_id`) REFERENCES `ekstrakurikuler` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_aturan_indikator` FOREIGN KEY (`indikator_id`) REFERENCES `indikator_rekomendasi` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `rekomendasi_ekstrakurikuler`
+--
+ALTER TABLE `rekomendasi_ekstrakurikuler`
+  ADD CONSTRAINT `fk_rekekskul_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rekekskul_ekskul` FOREIGN KEY (`ekstrakurikuler_id`) REFERENCES `ekstrakurikuler` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `keikutsertaan_ekstrakurikuler`
+--
+ALTER TABLE `keikutsertaan_ekstrakurikuler`
+  ADD CONSTRAINT `fk_ikutekskul_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_ikutekskul_ekskul` FOREIGN KEY (`ekstrakurikuler_id`) REFERENCES `ekstrakurikuler` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `study_tracer`
+--
+ALTER TABLE `study_tracer`
+  ADD CONSTRAINT `fk_tracer_murid` FOREIGN KEY (`murid_id`) REFERENCES `murid` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_tracer_pt` FOREIGN KEY (`perguruan_tinggi_id`) REFERENCES `perguruan_tinggi` (`id`) ON DELETE RESTRICT,
+  ADD CONSTRAINT `fk_tracer_bukualumni` FOREIGN KEY (`buku_alumni_id`) REFERENCES `buku_alumni` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `sertifikat_prestasi`
+--
+ALTER TABLE `sertifikat_prestasi`
+  ADD CONSTRAINT `fk_sertpres_tracer` FOREIGN KEY (`study_tracer_id`) REFERENCES `study_tracer` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `data_alumni_perguruan_tinggi`
+--
+ALTER TABLE `data_alumni_perguruan_tinggi`
+  ADD CONSTRAINT `fk_dataalumni_tracer` FOREIGN KEY (`study_tracer_id`) REFERENCES `study_tracer` (`id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
